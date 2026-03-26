@@ -18,9 +18,9 @@ jobs:
 
       - name: Build and Push
         run: |
-          # יצירת שם תגית לפי שם ה-branch (למשל feature-1)
+          # יצירת שם תגית לפי שם ה-branch
           TAG=${{ github.ref_name }}
-          IMAGE_NAME=YOUR_DOCKERHUB_USER/flask-app
+          IMAGE_NAME=nirangu/flask-app
           
           docker build -t $IMAGE_NAME:$TAG .
           docker push $IMAGE_NAME:$TAG
@@ -29,7 +29,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           # הרצת הקונטיינר לבדיקה
-          docker run -d -p 5000:5000 --name test-app YOUR_DOCKERHUB_USER/flask-app:main
+          docker run -d -p 5000:5000 --name test-app nirangu/flask-app:main
           sleep 5
           # בדיקה שהשרת עונה
           curl --fail http://localhost:5000 || exit 1
